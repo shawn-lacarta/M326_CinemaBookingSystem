@@ -2,8 +2,7 @@
 This project represents a cinema on which a user can buy tickets. 
 
 ## Use-Cases
-* Create Tickets
-* Give Tickets to Visitors
+* Buy Tickets
 * Special offers
 * Sign Up and Login Users
 

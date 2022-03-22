@@ -4,8 +4,8 @@ This project represents a cinema on which a user can buy tickets.
 ## Use-Cases
 Client:  
 
-* Buy Tickets
-* Special offers
+* Buy tickets
+* Special offers to ticket
 * Sign up and login as user    
 
 Admin:    

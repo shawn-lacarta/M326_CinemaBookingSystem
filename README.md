@@ -14,6 +14,8 @@ Admin:
 * See all users
 * Make a special offer
 
+You can find our diagrams and description to the use-cases in our repository.
+
 ## Contributors
 Shawn Lacarta  
 Enes Spahiu

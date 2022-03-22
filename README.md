@@ -5,7 +5,7 @@ This project represents a cinema on which a user can buy tickets.
 Client:  
 
 * Buy tickets
-* Special offers to ticket
+* Buy ticket with special offer
 * Sign up and login as user    
 
 Admin:    

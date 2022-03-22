@@ -6,7 +6,7 @@ Client:
 
 * Buy Tickets
 * Special offers
-* Sign Up and Login Users    
+* Sign up and login as user    
 
 Admin:    
 

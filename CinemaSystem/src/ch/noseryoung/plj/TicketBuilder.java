@@ -1,5 +1,4 @@
 package ch.noseryoung.plj;
 
-public class Ticket {
-
+public class TicketBuilder {
 }

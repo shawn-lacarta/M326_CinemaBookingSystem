@@ -1,0 +1,16 @@
+version: "3.9"
+    
+services:
+    userDB:
+        image: mariadb
+        container_name: M326-Cinema
+        volumes:
+            - ./userDB/:/var/lib/mysql
+        restart: on-failure
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpw
+            MYSQL_DATABASE: M326-Cinema
+            MYSQL_USER: stduser
+            MYSQL_PASSWORD: stduserpw
+        ports:
+          - "3306:3306"

@@ -3,8 +3,6 @@ M
 src/ch/noseryoung/plj/IO.java,f\f\ff960d06f2961f8e0c3f73747f61282d3b67cbad
 O
 src/ch/noseryoung/plj/Main.java,c\9\c922908c3893534e2cbe3708e5c9cf22140da90b
-M
-src/ch/noseryoung/plj/DB.java,f\8\f83f4761357b3f9ba1b76dd8218e21e2b0f7b2ec
 R
 "src/ch/noseryoung/plj/Manager.java,0\a\0a6a13f743fc6f052a75b17315219cc667441411
 X

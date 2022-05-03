@@ -1,4 +1,6 @@
-package ch.noseryoung.plj;
+package ch.noseryoung.plj.person;
 
-public class User {
+public class User extends Person{
+    private String email;
+
 }

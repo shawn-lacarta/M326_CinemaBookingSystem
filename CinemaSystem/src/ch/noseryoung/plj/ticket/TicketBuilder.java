@@ -1,4 +1,4 @@
-package ch.noseryoung.plj;
+package ch.noseryoung.plj.ticket;
 
 public class TicketBuilder {
 }

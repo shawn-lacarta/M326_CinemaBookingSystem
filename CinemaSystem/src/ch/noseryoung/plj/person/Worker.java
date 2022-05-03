@@ -1,4 +1,6 @@
-package ch.noseryoung.plj;
+package ch.noseryoung.plj.person;
 
-public class Worker {
+public class Worker extends Person{
+    private int workerId;
+
 }

@@ -1,4 +1,4 @@
-package ch.noseryoung.plj;
+package ch.noseryoung.plj.cinema;
 
 public class Movie {
 

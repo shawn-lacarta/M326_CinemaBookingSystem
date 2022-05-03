@@ -1,2 +1,4 @@
-package ch.noseryoung.plj.seat;public class SeatBuilder {
+package ch.noseryoung.plj.seat;
+
+public class SeatBuilder {
 }

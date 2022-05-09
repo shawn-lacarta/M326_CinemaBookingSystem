@@ -11,8 +11,8 @@ public class UserDB {
 
     private Connection connection = null;
     private final String userName = "stduser";
-    private final String password = "pwd";
-    private final String URL = "jdbc:mariadb://localhost:3306/zoo";
+    private final String password = "stduserpw";
+    private final String URL = "jdbc:mariadb://localhost:3306/Cinema-DB";
     private final String driver = "org.mariadb.jdbc.Driver";
     User user;
     Scanner sc = new Scanner(System.in);
@@ -40,7 +40,7 @@ public class UserDB {
             rs = stmt.executeQuery("SELECT * FROM users");
             while (rs.next()) {
                 users.add(new User((String) rs.getObject(2), ((String) rs.getObject(3)),
-                        ((String) rs.getObject(6)), ((String) rs.getObject(5)), ((String) rs.getObject(4))));
+                        ((String) rs.getObject(4)), ((String) rs.getObject(5)), ((String) rs.getObject(6))));
             }
             rs.close();
         } catch (Exception e) {
@@ -62,41 +62,24 @@ public class UserDB {
         System.out.println("Enter your last name: ");
         String lastName = sc.nextLine();
 
-        while (errorOccurred) {
-            try {
-                System.out.println("Enter your workerId: ");
-                workerId = sc.nextInt();
-                sc.nextLine();
-                errorOccurred = false;
-            } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Wrong Input");
-                errorOccurred = true;
-                sc.nextLine();
-            }
-        }
-
         System.out.println("Enter your username: ");
-        String userName = sc.nextLine();
+        String username = sc.nextLine();
 
         System.out.println("Enter your password: ");
         String pwd = sc.nextLine();
 
+        System.out.println("Enter your email: ");
+        String email = sc.nextLine();
+
         try {
             connection = DriverManager.getConnection(URL, userName, password);
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO user " + "VALUES (" + generatedKey + ", '" + firstName + "' , '" + lastName + "', '" + pwd + "', '" + workerId + "', '" + userName + "')",
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO users " + "VALUES (" + generatedKey + ", '" + firstName + "' , '" + lastName + "', '" + email + "', '" + pwd + "', '" + username + "')",
                     Statement.RETURN_GENERATED_KEYS);
 
             ps.execute();
 
             System.out.println("Successfully Signed in");
-            System.out.println("Welcome to our Zoo");
-
-            User user = new User();
-
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPassword(pwd);
-            user.setUsername(userName);
+            System.out.println("Welcome to our Cinema");
 
         } catch (SQLException e) {
             System.out.println("Something went wrong");
@@ -121,7 +104,7 @@ public class UserDB {
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(URL, userName, password);
 
-            String query = "DELETE FROM user WHERE firstname='" + firstName + "' AND lastname='" + lastName + "' AND password='" + pwd + "'";
+            String query = "DELETE FROM users WHERE firstname='" + firstName + "' AND lastname='" + lastName + "' AND password='" + pwd + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
 
             preparedStmt.execute();
@@ -137,9 +120,6 @@ public class UserDB {
 
     public boolean loginUser() {
         boolean isLoggedIn = false;
-        String firstName = " ";
-        String lastName = " ";
-        String pwd = " ";
         ArrayList<User> users;
 
         users = getData();
@@ -147,29 +127,22 @@ public class UserDB {
         try {
             connection = DriverManager.getConnection(URL, userName, password);
             while (!isLoggedIn) {
-                System.out.println("Type in first name of Account or (s) to stop: (Look out for Capital letters)");
-                firstName = sc.nextLine();
+                System.out.println("Type in username of Account or (s) to stop: (Look out for Capital letters)");
+                String username = sc.nextLine();
 
-                if (firstName.toLowerCase().equals("s")) {
-                    break;
-                }
-
-                System.out.println("Type in last name of Account or (s) to stop: (Look out for Capital letters)");
-                lastName = sc.nextLine();
-
-                if (lastName.toLowerCase().equals("s")) {
+                if (username.toLowerCase().equals("s")) {
                     break;
                 }
 
                 System.out.println("Type in password of Account or (s) to stop: (Look out for Capital letters)");
-                pwd = sc.nextLine();
+                String pwd = sc.nextLine();
 
                 if (pwd.toLowerCase().equals("s")) {
                     break;
                 }
 
                 for (int i = 0; i < users.size(); i++) {
-                    if (users.get(i).getFirstName().equals(firstName) && users.get(i).getLastName().equals(lastName) && users.get(i).getPassword().equals(pwd)) {
+                    if (users.get(i).getUsername().equals(username) && users.get(i).getPassword().equals(pwd)) {
                         isLoggedIn = true;
                         user = new User(users.get(i).getFirstName(), users.get(i).getLastName(), users.get(i).getUsername(), users.get(i).getPassword(), users.get(i).getEmail());
 
@@ -200,7 +173,7 @@ public class UserDB {
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(URL, userName, password);
 
-            String query = "UPDATE user SET firstname=" + user.getFirstName() + ", lastmame=" + user.getLastName() + ", password=" + user.getPassword() + ", email=" + user.getEmail() + "username=" + user.getUsername() + " WHERE firstName='" + user.getFirstName() + "' AND lastName='" + user.getLastName() + "' AND password='" + user.getPassword() + "'";
+            String query = "UPDATE users SET firstname=" + user.getFirstName() + ", lastmame=" + user.getLastName() + ", password=" + user.getPassword() + ", email=" + user.getEmail() + "username=" + user.getUsername() + " WHERE firstName='" + user.getFirstName() + "' AND lastName='" + user.getLastName() + "' AND password='" + user.getPassword() + "'";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
 
             preparedStmt.execute();

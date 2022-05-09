@@ -3,7 +3,6 @@ package ch.noseryoung.plj;
 public class Main {
 
     public static void main(String[] args) {
-        Manager m = new Manager();
-        m.printVehicle();
+        new Manager().starter();
     }
 }

@@ -1,10 +1,7 @@
 package ch.noseryoung.plj.person.user;
 
-import ch.noseryoung.plj.person.user.User;
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserDB {
@@ -85,7 +82,30 @@ public class UserDB {
             System.out.println("Something went wrong");
         }
 
-        updateTable();
+    }
+
+    public void insertDataMock(String firstName, String lastName, String pwd, String email, String username) {
+
+        int generatedKey = 0;
+
+        try {
+            connection = DriverManager.getConnection(URL, userName, password);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO users " + "VALUES (" + generatedKey + ", '" + firstName + "' , '" + lastName + "', '" + email + "', '" + pwd + "', '" + username + "')",
+                    Statement.RETURN_GENERATED_KEYS);
+
+            ps.execute();
+
+            user = new User(firstName, lastName, email, pwd, username);
+
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPassword(pwd);
+            user.setEmail(email);
+            user.setUsername(username);
+
+        } catch (SQLException e){
+            System.out.println("Something went wrong");
+        }
 
     }
 
@@ -112,6 +132,27 @@ public class UserDB {
             System.out.println("User deleted");
 
         } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    public void deleteDataMock(String firstName, String lastName, String pwd) {
+        try {
+
+            Class.forName(driver);
+            Connection conn = DriverManager.getConnection(URL, userName, password);
+
+            String query = "DELETE FROM users WHERE firstname='" + firstName + "' AND lastname='" + lastName + "' AND password='" + pwd + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+
+            preparedStmt.execute();
+
+            System.out.println("User deleted");
+
+        }
+        catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
@@ -163,6 +204,44 @@ public class UserDB {
                 }
             }
         } catch (Exception e) {
+            System.out.println("Something went wrong");
+        }
+        return isLoggedIn;
+    }
+
+    public boolean loginUserMock(String firstName, String lastName, String pwd) {
+        boolean isLoggedIn = false;
+        ArrayList<User> users;
+
+        users = getData();
+
+        try{
+            connection = DriverManager.getConnection(URL, userName, password);
+            while (!isLoggedIn) {
+
+                for (int i = 0; i < users.size(); i++) {
+                    if (users.get(i).getFirstName().equals(firstName) && users.get(i).getLastName().equals(lastName) && users.get(i).getPassword().equals(pwd)) {
+                        isLoggedIn = true;
+                        user = new User(users.get(i).getFirstName(), users.get(i).getLastName(), users.get(i).getEmail(), users.get(i).getPassword(), users.get(i).getUsername());
+
+                        user.setFirstName(users.get(i).getFirstName());
+                        user.setLastName(users.get(i).getLastName());
+                        user.setEmail(users.get(i).getEmail());
+                        user.setUsername(users.get(i).getUsername());
+                        user.setPassword(users.get(i).getPassword());
+
+                        break;
+                    } else {
+                        isLoggedIn = false;
+                    }
+                }
+                if (isLoggedIn){
+                    System.out.println("Successfully logged in");
+                }else {
+                    System.out.println("There is no such user, try again");
+                }
+            }
+        }catch (Exception e){
             System.out.println("Something went wrong");
         }
         return isLoggedIn;

@@ -1,5 +1,8 @@
 package ch.noseryoung.plj.person.admin;
 
+import ch.noseryoung.plj.person.admin.Admin;
+import ch.noseryoung.plj.person.user.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -98,7 +101,30 @@ public class AdminDB {
             System.out.println("Something went wrong");
         }
 
-        updateTable();
+    }
+
+    public void insertDataMock(String firstName, String lastName, String pwd, int workerId, String username) {
+
+        int generatedKey = 0;
+
+        try {
+            connection = DriverManager.getConnection(URL, userName, password);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO admins " + "VALUES (" + generatedKey + ", '" + firstName + "' , '" + lastName + "', '" + pwd + "', '" + workerId + "', '" + username + "')",
+                    Statement.RETURN_GENERATED_KEYS);
+
+            ps.execute();
+
+            admin = new Admin(firstName, lastName, pwd, workerId,username);
+
+            admin.setFirstName(firstName);
+            admin.setLastName(lastName);
+            admin.setPassword(pwd);
+            admin.setWorkerId(workerId);
+            admin.setUsername(username);
+
+        } catch (SQLException e){
+            System.out.println("Something went wrong");
+        }
 
     }
 
@@ -122,9 +148,30 @@ public class AdminDB {
 
             preparedStmt.execute();
 
-            System.out.println("User deleted");
+            System.out.println("Admin deleted");
 
         } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    public void deleteDataMock(String firstName, String lastName, String pwd) {
+        try {
+
+            Class.forName(driver);
+            Connection conn = DriverManager.getConnection(URL, userName, password);
+
+            String query = "DELETE FROM admins WHERE firstname='" + firstName + "' AND lastname='" + lastName + "' AND password='" + pwd + "'";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+
+            preparedStmt.execute();
+
+            System.out.println("Admin deleted");
+
+        }
+        catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
@@ -171,10 +218,48 @@ public class AdminDB {
                 if (isLoggedIn) {
                     System.out.println("Successfully logged in");
                 } else {
-                    System.out.println("There is no such user, try again");
+                    System.out.println("There is no such admin, try again");
                 }
             }
         } catch (Exception e) {
+            System.out.println("Something went wrong");
+        }
+        return isLoggedIn;
+    }
+
+    public boolean loginUserMock(String firstName, String lastName, String pwd) {
+        boolean isLoggedIn = false;
+        ArrayList<Admin> users;
+
+        users = getData();
+
+        try{
+            connection = DriverManager.getConnection(URL, userName, password);
+            while (!isLoggedIn) {
+
+                for (int i = 0; i < users.size(); i++) {
+                    if (users.get(i).getFirstName().equals(firstName) && users.get(i).getLastName().equals(lastName) && users.get(i).getPassword().equals(pwd)) {
+                        isLoggedIn = true;
+                        admin = new Admin(users.get(i).getFirstName(), users.get(i).getLastName(), users.get(i).getPassword(), users.get(i).getWorkerId(),users.get(i).getUsername());
+
+                        admin.setFirstName(users.get(i).getFirstName());
+                        admin.setLastName(users.get(i).getLastName());
+                        admin.setWorkerId(users.get(i).getWorkerId());
+                        admin.setUsername(users.get(i).getUsername());
+                        admin.setPassword(users.get(i).getPassword());
+
+                        break;
+                    } else {
+                        isLoggedIn = false;
+                    }
+                }
+                if (isLoggedIn){
+                    System.out.println("Successfully logged in");
+                }else {
+                    System.out.println("There is no such admin, try again");
+                }
+            }
+        }catch (Exception e){
             System.out.println("Something went wrong");
         }
         return isLoggedIn;

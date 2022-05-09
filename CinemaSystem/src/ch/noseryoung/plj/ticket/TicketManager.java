@@ -10,7 +10,7 @@ public class TicketManager {
 
     IO io = new IO();
 
-    private ArrayList<Ticket> tickets = new ArrayList<>();
+    private static ArrayList<Ticket> tickets = new ArrayList<>();
     private User user;
 
     public TicketManager(ArrayList<Ticket> tickets) {
@@ -19,7 +19,6 @@ public class TicketManager {
 
     public TicketManager(User user) {
         this.user = user;
-        fillTickets();
     }
 
     public TicketManager() {
@@ -32,6 +31,7 @@ public class TicketManager {
     }
 
     public void chooseTicket() {
+        fillTickets();
         String answer = io.showAllTickets(tickets);
         boolean hasChosenTicket = false;
         for(Ticket ticket : getTickets()) {

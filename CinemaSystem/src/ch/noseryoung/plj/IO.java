@@ -38,8 +38,8 @@ public class IO {
 
         while (errorOccured){
             try {
-                drawBox(40, "1. Delete Admin");
-                drawBox(40, "2. Create Admin");
+                drawBox(40, "1. Delete Admin ");
+                drawBox(40, "2. Create Admin ");
                 drawBox(40, "3. Create Ticket");
                 drawBox(40, "4. Exit ");
                 answer = sc.nextInt();
@@ -163,9 +163,9 @@ public class IO {
         while (errorOccured){
             try {
                 drawBox(40, "1. Popcorn");
-                drawBox(40, "2. Nachos");
+                drawBox(40, "2. Nachos ");
                 drawBox(40, "3. Popcorn and Drink");
-                drawBox(40, "4. Nachos and Drink");
+                drawBox(40, "4. Nachos and Drink ");
                 drawBox(40, "5. Nothing");
                 answer = sc.nextInt();
                 sc.nextLine();

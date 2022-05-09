@@ -85,8 +85,6 @@ public class UserDB {
             System.out.println("Something went wrong");
         }
 
-        updateTable();
-
     }
 
     public void deleteData() {

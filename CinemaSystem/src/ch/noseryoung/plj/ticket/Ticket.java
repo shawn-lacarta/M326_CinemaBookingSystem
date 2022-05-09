@@ -4,6 +4,9 @@ import ch.noseryoung.plj.IO;
 import ch.noseryoung.plj.cinema.Movie;
 import ch.noseryoung.plj.person.user.User;
 
+/**
+ * Responsible for the ticket in this application
+ */
 public class Ticket {
 
     private Movie movie;

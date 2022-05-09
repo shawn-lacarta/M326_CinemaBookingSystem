@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class is the connection to the database for the admin user. The
+ * connection is captured here in this class.
+ */
 public class AdminDB {
 
     private Connection connection = null;
@@ -18,6 +22,9 @@ public class AdminDB {
     public AdminDB() {
     }
 
+    /**
+     * This method tests the connection of the database.
+     */
     public void testConnection() {
         try {
             setConnection(DriverManager.getConnection(URL, userName, password));
@@ -26,6 +33,10 @@ public class AdminDB {
         }
     }
 
+    /**
+     * Gets data from the admin database
+     * @return arraylist with all admin user
+     */
     public ArrayList<Admin> getData() {
         String output = "";
         ArrayList<Admin> admins = new ArrayList<>();
@@ -48,6 +59,9 @@ public class AdminDB {
         return admins;
     }
 
+    /**
+     * Inserts data (admin) to the database.
+     */
     public void insertData() {
 
         boolean errorOccurred = true;
@@ -102,6 +116,9 @@ public class AdminDB {
 
     }
 
+    /**
+     * Deletes data from the database
+     */
     public void deleteData() {
         try {
 
@@ -131,6 +148,10 @@ public class AdminDB {
 
     }
 
+    /**
+     * Checks if the user is logged in
+     * @return true or false
+     */
     public boolean loginUser() {
         boolean isLoggedIn = false;
         ArrayList<Admin> admins = getData();
@@ -180,6 +201,9 @@ public class AdminDB {
         return isLoggedIn;
     }
 
+    /**
+     * Responsible to update the table for admins
+     */
     public void updateTable() {
         try {
             Class.forName(driver);

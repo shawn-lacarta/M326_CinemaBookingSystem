@@ -7,10 +7,18 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Responsible for every In and Output in this application. Everything
+ * that has to do with the user is captured here.
+ */
 public class IO {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Method that starts the program
+     * @return number of the users insertion
+     */
     public int startProgram() {
         int answer = 0;
         boolean errorOccured = true;
@@ -32,6 +40,10 @@ public class IO {
         return answer;
     }
 
+    /**
+     * Menu that shows up for admin user
+     * @return number of users insertion
+     */
     public int adminMenu() {
         int answer = 0;
         boolean errorOccured = true;
@@ -53,6 +65,10 @@ public class IO {
         return answer;
     }
 
+    /**
+     * Menu that shows up for admin user
+     * @return number of users insertion
+     */
     public int userMenu() {
         int answer = 0;
         boolean errorOccured = true;
@@ -74,6 +90,11 @@ public class IO {
         return answer;
     }
 
+    /**
+     * shows every ticket so that the user can choose.
+     * @param tickets Arraylist with tickets
+     * @return a string which is a ticket
+     */
     public String showAllTickets(ArrayList<Ticket> tickets) {
         for (Ticket ticket : tickets) {
             drawBox(80, ticket.getMovie().getMovieName() + " / " + ticket.getTicketExtra().toString());
@@ -84,6 +105,11 @@ public class IO {
 
         return answer;
     }
+
+    /**
+     * Shows ticket that the user owns
+     * @param ticket
+     */
     public void showAllOwnTickets(Ticket ticket) {
         if (ticket != null) {
             drawBox(80, ticket.getMovie().getMovieName() + " / " + ticket.getTicketExtra().toString());
@@ -93,6 +119,10 @@ public class IO {
     }
 
 
+    /**
+     * Menu for the cinema.
+     * @return returns the number that the user wants
+     */
     public int cinemaMenu() {
         int answer = 0;
         boolean errorOccured = true;
@@ -112,6 +142,10 @@ public class IO {
         return answer;
     }
 
+    /**
+     * Creation of a movie dialog
+     * @return the movie that is made
+     */
     public Movie createMovieDialog() {
 
         int year = 0;
@@ -156,6 +190,10 @@ public class IO {
         return new Movie(movieName, language, duration, genre, year);
     }
 
+    /**
+     * User can choose which extras he wants for the ticket
+     * @return insertion of user
+     */
     public int ticketExtraDialog() {
         int answer = 0;
         boolean errorOccured = true;
@@ -178,6 +216,11 @@ public class IO {
         return answer;
     }
 
+    /**
+     * Draw box that is here for the output.
+     * @param length of the word
+     * @param singleWord for every word
+     */
     public void drawBox(int length, String singleWord){
 
         if (singleWord.length() > length){

@@ -5,6 +5,9 @@ import ch.noseryoung.plj.person.Person;
 import ch.noseryoung.plj.ticket.Ticket;
 import ch.noseryoung.plj.ticket.TicketManager;
 
+/**
+ * Responsible for a normal user in the application.
+ */
 public class User extends Person {
 
     UserDB userDB = new UserDB();
@@ -22,19 +25,31 @@ public class User extends Person {
     public User() {
     }
 
+    /**
+     * This method is responsible for the user login.
+     */
     public void loginUser() {
         userDB.loginUser();
         userMenu();
     }
 
+    /**
+     * This method is responsible for the creation of user.
+     */
     public void createUser() {
         userDB.insertData();
     }
 
+    /**
+     * This method is responsible for removing an user.
+     * */
     public void deleteUser() {
         userDB.deleteData();
     }
 
+    /**
+     * This method shows the menu as a user.
+     */
     public void userMenu() {
         int answer = 1;
 
@@ -49,6 +64,9 @@ public class User extends Person {
         }
     }
 
+    /**
+     * Shows tickets for the user
+     */
     public void showTickets() {
         io.showAllOwnTickets(ticket);
     }

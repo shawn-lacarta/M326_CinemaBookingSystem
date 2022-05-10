@@ -1,5 +1,9 @@
 package ch.noseryoung.plj.cinema;
 
+/**
+ * The movie class is responsible for the creation of all the movies. Every attribute
+ * that is needed for a movie is found in this class.
+ */
 public class Movie {
 
     String movieName;

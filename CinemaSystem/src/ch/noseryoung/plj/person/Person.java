@@ -1,5 +1,8 @@
 package ch.noseryoung.plj.person;
 
+/**
+ * Responsible for every person in this application.
+ */
 public class Person {
     protected String firstName;
     protected String lastName;

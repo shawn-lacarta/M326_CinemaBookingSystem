@@ -2,11 +2,17 @@ package ch.noseryoung.plj.ticket;
 
 import ch.noseryoung.plj.IO;
 
+/**
+ * Responsible the builder for ticket
+ */
 public class TicketBuilder {
 
     TicketManager tm = new TicketManager();
     IO io = new IO();
 
+    /**
+     * Here for the creation of tickets
+     */
     public void createTicket() {
 
         tm.getTickets().add(new Ticket(io.createMovieDialog(), ticketExtra()));

@@ -57,9 +57,11 @@ public class User extends Person {
             answer = io.userMenu();
 
             switch (answer) {
-                case 1 -> deleteUser();
-                case 2 -> ticketManager.chooseTicket();
-                case 3 -> showTickets();
+                case 1: deleteUser();
+                answer = 0;
+                break;
+                case 2: ticketManager.chooseTicket();
+                case 3: showTickets();
             }
         }
     }
